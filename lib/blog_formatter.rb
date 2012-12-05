@@ -2,11 +2,22 @@ module BlogFormatter
   extend self
   
   def close_tags(code)
-    open_tags = {}
-    closed_tags = {}
-    code.scan(/\<([^\>\s\/]+)[^\>\/]*?\>/).each { |t| open_tags[t[0]] ? open_tags[t[0]] += 1 : open_tags[t[0]] = 1 }
-    code.scan(/\<\/([^\>\s\/]+)[^\>]*?\>/).each { |t| closed_tags[t[0]] ? closed_tags[t[0]] += 1 : closed_tags[t[0]] = 1 }
-    open_tags.each {|k,v| code += "</#{k}>" * (open_tags[k] - closed_tags[k].to_i) if closed_tags[k].to_i < v }
+    open_tags = []
+    
+    code.scan(/\<([^\>\s\/]+)[^\>\/]*?\>/).each { |tags| open_tags += tags }
+    
+    open_tags.reverse!
+
+    code.scan(/\<\/([^\>\s\/]+)[^\>]*?\>/).each do |tags|
+      tag = tags.first
+      raise ArgumentError unless tags.size == 1
+      if i = open_tags.index { |item| item == tag }
+        open_tags.delete_at i
+      end
+    end
+    
+    code += open_tags.map { |tag| "</#{tag}>" }.join
+    
     return code
   end
   
