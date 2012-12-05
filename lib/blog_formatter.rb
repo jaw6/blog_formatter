@@ -1,6 +1,14 @@
 module BlogFormatter
   extend self
   
+  def truncate_html(string, limit=150)
+    string = string.strip
+    return string if string.size <= limit
+    limited = limited_html(string, limit)
+    return limited
+  end
+
+  private
   def close_tags(code)
     open_tags = []
     
@@ -66,11 +74,5 @@ module BlogFormatter
     string
   end
   
-  def truncate_html(string, limit=150)
-    string = string.strip
-    return string if string.size <= limit
-    limited = limited_html(string, limit)
-    return limited
-  end
   
 end
