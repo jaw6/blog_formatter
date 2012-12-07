@@ -96,4 +96,66 @@ module BlogFormatter
     TruncatableHtml.new(string).truncate(limit)
   end
   
+  def self.blog_format(text, text_format='htmlify')
+    return '' if text.nil? || text.empty? 
+    return text if text_format == 'html'
+    # Goofy old format links
+    text.gsub!(%r{\[?link=([^\]]+)\]([^\[]+)\[/link\]}, '<a href="\1">\2</a>')
+    # Link-ify plain http://www...
+    text.gsub!(/(\s)(http\:|www.)([\S]+)(\s|$)/, '\1 <a href="\2\3">\2\3</a>\4')
+    # Fix my old graphics directory...
+    text.gsub!(%r{src="grfx/}, 'src="/images/grfx/')
+    # Wrap long links?
+    # doodad...
+    
+    # Additional formatting
+    if text_format == 'redcloth'
+      text = fix(RedCloth.new(text).to_html)
+    else
+      text = htmlify(text)
+    end
+    text
+  end
+
+  private
+  def self.fix(text)
+    # no strikethrough 
+    text.gsub!(%r{<del>(.*)</del>}, '\1')
+    text.gsub!(%r{<blockquote>\s*<p>}, '<blockquote><p>')
+    text.gsub!(%r{<blockquote>([^<]+)<p>}, '<blockquote><p>\1</p><p>')
+    text
+  end
+
+  def self.htmlify(text)
+    # Standardize line-breaks
+    text.gsub!("\r\n", "\n")
+    text.gsub!("\r", "\n")
+    text.gsub!(" -- ", " &mdash; ")
+    bad_html = %r{(p|ul|div|li|br|br /|blockquote|h1|h2|h3|h4|h5)}
+
+    text.gsub!(%r|([^\n])\n<(#{bad_html})|, "\\1\n\n<\\2")
+    text.gsub!(%r|</(#{bad_html}[^>]*)>\n([^\n])|, "</\\1>\n\n\\3")
+  
+    lines = text.split("\n\n")
+    lines.each_with_index do |line,i|
+      test_beg = (%r|^<#{bad_html}([^>]*)>.*$| =~ line)
+      test_end = (%r|.*</#{bad_html}([^>]*)>$| =~ line)
+      if !(test_beg && test_end)
+        line.gsub!(/>(\n|\t| )*</, '> <')
+        line.gsub!("\n", "<br />")
+        line = "<p>#{line}</p>"
+      end
+      lines[i] = line
+      #puts "#{i}: #{line}"
+    end
+    text = lines.join("\n\n")
+  
+    # Special: These are just tricky
+    text.gsub!('<br /></blockquote></p>', '</p></blockquote>')
+    text.gsub!('</blockquote></p>', '</p></blockquote>')
+    text.gsub!('<p><blockquote><br />', '<blockquote><p>')
+    text.gsub!('<p><blockquote>', '<blockquote><p>')
+    text    
+  end
+  
 end

@@ -1,0 +1,17 @@
+    <p>The &#8220;4 Things&#8221; meme:</p>
+
+    <h4>Jobs I Have Had in My Life</h4>
+  	<ol>
+    	<li>Web Developer</li>
+  		<li>Temp</li>
+  		<li>Teaching Assistant</li>
+  		<li>Baby-sitter</li>
+  	</ol>
+
+  	<h4>Movies Seen More Than Once</h4>
+  	<ol>
+    	<li>Shaun of the Dead</li>
+  		<li>Idiocracy</li>
+  		<li>Star Wars</li>
+  		<li>The Incredibles</li>
+  	</ol>

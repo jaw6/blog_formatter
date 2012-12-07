@@ -1,0 +1,7 @@
+<p>I'm very excited to be speaking at the Scottish Ruby Conference on Saturday. I've been an attendee at the conference (well, in its previous incarnation as Scotland on Rails) and it's one of my all-time favorite conferences. </p>
+
+<p style="text-align:center"><img src="http://scottishrubyconference.com/images/badges/src-240-speaking.jpg" /></p>
+
+<p>My talk is on the challenges of developing multilingual applications in Ruby and Rails. I'll be drawing on my experiences on both sides of the screen &mdash; as a developer building web apps, and as a traveler trying to use poorly localized sites. </p>
+
+<p>For anyone who can't attend, I'll post my slides here shortly after the conference, and I understand they might be making videos available again this year.</p>

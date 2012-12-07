@@ -1,11 +1,12 @@
 require 'test_helper'
 
 class BlogFormatterTest < ActiveSupport::TestCase
-  test "truth" do
-    assert_kind_of Module, BlogFormatter
-  end
 
   def setup
+  end
+
+  test "truth" do
+    assert_kind_of Module, BlogFormatter
   end
   
   test "truncate short should just return" do
@@ -51,36 +52,32 @@ class BlogFormatterTest < ActiveSupport::TestCase
     string = long_string
     assert_equal '<p>The &#8220;4 Things&#8221; meme:</p> <h4>Jobs I Have Had in My Life</h4> <ol> <li>Web Developer</li> <li>Temp</li> <li>Teaching Assistant</li> <li>Baby-sitter</li> </ol> &hellip;', BlogFormatter.truncate_html(string)
   end
+
+  test "htmlify with sample" do
+    sample, expected = samples('htmlify_sample')
+    result = BlogFormatter.blog_format(sample, 'htmlify')
+    assert_equal result, expected
+  end
+  
+  test "redcloth with sample" do
+    sample, expected = samples('redcloth_sample')
+    result = BlogFormatter.blog_format(sample, 'redcloth')
+    assert_equal expected, result
+  end
   
   private
+  def samples(name)
+    input  = File.read File.join(File.dirname(__FILE__), 'samples', 'input', "#{name}.txt")
+    output = File.read File.join(File.dirname(__FILE__), 'samples', 'output', "#{name}.txt")
+    [input.strip, output.strip]
+  end
+  
   def medium_string
-    @medium_string ||= <<-STRING
-    <p>A group, <a href="http://www.pnhp.org">Physicians for a National Health Program</a>, has an interesting <a href="http://www.pnhp.org/news/2008/january/doctors_give_massach.php">press release</a>, distilled from an &#8220;open letter&#8221; signed by 250 doctors in Massachussets. (I learned about it from <a href="http://www.cjr.org/campaign_desk/mitts_health_plan_debunked.php?page=all"><span class="caps">CJR</span></a>, which says that it&#8217;s not getting any media coverage.)</p>
-
-    <p>The ostensible goal of the program is to &#8220;provide residents with medical insurance&#8221;, that is, by <strong>requiring</strong> them to pay for health insurance. If they don&#8217;t, they will be fined. If they&#8217;re a certain distance below the poverty line, there&#8217;s a tax refund for the insurance. Employers who don&#8217;t provide health insurance to their employees are also fined.</p>
-    STRING
+    @medium_string ||= File.read File.join(File.dirname(__FILE__), 'samples', 'input', "medium_sample.txt")
   end
   
   def long_string
-    @long_string ||= <<-STRING
-    <p>The &#8220;4 Things&#8221; meme:</p>
-
-    <h4>Jobs I Have Had in My Life</h4>
-  	<ol>
-    	<li>Web Developer</li>
-  		<li>Temp</li>
-  		<li>Teaching Assistant</li>
-  		<li>Baby-sitter</li>
-  	</ol>
-
-  	<h4>Movies Seen More Than Once</h4>
-  	<ol>
-    	<li>Shaun of the Dead</li>
-  		<li>Idiocracy</li>
-  		<li>Star Wars</li>
-  		<li>The Incredibles</li>
-  	</ol>
-    STRING
+    @long_string ||= File.read File.join(File.dirname(__FILE__), 'samples', 'input', "long_sample.txt")
   end
 
 end
