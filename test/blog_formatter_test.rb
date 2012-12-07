@@ -66,18 +66,22 @@ class BlogFormatterTest < ActiveSupport::TestCase
   end
   
   private
+  def get_sample(name)
+    File.read File.join(Rails.root, '..', 'samples', "#{name}.txt")
+  end
+
   def samples(name)
-    input  = File.read File.join(File.dirname(__FILE__), 'samples', 'input', "#{name}.txt")
-    output = File.read File.join(File.dirname(__FILE__), 'samples', 'output', "#{name}.txt")
+    input  = get_sample "input/#{name}"
+    output = get_sample "output/#{name}"
     [input.strip, output.strip]
   end
   
   def medium_string
-    @medium_string ||= File.read File.join(File.dirname(__FILE__), 'samples', 'input', "medium_sample.txt")
+    @medium_string ||= get_sample "input/medium_sample"
   end
   
   def long_string
-    @long_string ||= File.read File.join(File.dirname(__FILE__), 'samples', 'input', "long_sample.txt")
+    @long_string ||= get_sample "input/long_sample"
   end
 
 end
