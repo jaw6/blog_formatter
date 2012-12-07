@@ -7,11 +7,11 @@ require "blog_formatter/version"
 Gem::Specification.new do |s|
   s.name        = "blog_formatter"
   s.version     = BlogFormatter::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
+  s.authors     = 'Joshua Wehner'
+  s.email       = 'joshua.wehner@gmail.com'
   s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of BlogFormatter."
-  s.description = "TODO: Description of BlogFormatter."
+  s.summary     = "A simple formatting mechanism"
+  s.description = "It's a really simple formatting mechanism"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
