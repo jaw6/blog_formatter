@@ -6,8 +6,6 @@ class BlogFormatter::BasicRenderer
   
   def initialize(format)
     @format   = format
-    klass     = renderer_for(format)
-    @renderer = klass.new
   end
   
   def render(text)
@@ -15,7 +13,7 @@ class BlogFormatter::BasicRenderer
     return text if format == 'html'
 
     prepare!(text)
-    @renderer.render text
+    renderer_for(@format).new.render text
   end
   
   private

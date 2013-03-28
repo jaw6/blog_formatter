@@ -70,6 +70,12 @@ class BlogFormatterTest < ActiveSupport::TestCase
     assert_equal expected, result
   end
   
+  test "html with sample" do
+    sample, expected = ["<p>This is already formatted.</p>"] * 2
+    result = @foo.blog_format(sample, 'html')
+    assert_equal expected, result
+  end
+  
   private
   def get_sample(name)
     File.read File.join(Rails.root, '..', 'samples', "#{name}.txt")
