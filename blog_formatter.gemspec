@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = BlogFormatter::VERSION
   s.authors     = 'Joshua Wehner'
   s.email       = 'joshua.wehner@gmail.com'
-  s.homepage    = "TODO"
+  s.homepage    = "http://www.joshuawehner.com/"
   s.summary     = "A simple formatting mechanism"
   s.description = "It's a really simple formatting mechanism"
 
