@@ -1,3 +1,5 @@
+require 'blog_formatter'
+
 class BlogFormatter::CustomRenderer
   def render(text)
     # Standardize line-breaks
