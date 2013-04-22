@@ -1,3 +1,5 @@
+require 'RedCloth'
+
 class BlogFormatter::RedClothRenderer
   def render(text)
     redclothed = RedCloth.new(text)
