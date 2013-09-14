@@ -3,11 +3,13 @@ PATH
   specs:
     blog_formatter (0.0.1)
       RedCloth (~> 4.2.0)
+      kramdown
 
 GEM
   remote: http://rubygems.org/
   specs:
     RedCloth (4.2.9)
+    kramdown (1.2.0)
     minitest (5.0.7)
     rake (10.1.0)
 

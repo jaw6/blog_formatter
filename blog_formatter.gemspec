@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   # s.add_dependency "rails", "~> 3.2.9"
   s.add_dependency 'RedCloth', '~> 4.2.0'
+  s.add_dependency 'kramdown'
 
   s.add_development_dependency "rake"
   s.add_development_dependency "minitest"

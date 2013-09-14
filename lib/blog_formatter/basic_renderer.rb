@@ -1,4 +1,5 @@
 require 'blog_formatter/custom_renderer'
+require 'blog_formatter/markdown_renderer'
 require 'blog_formatter/redcloth_renderer'
 
 module BlogFormatter
@@ -21,6 +22,7 @@ module BlogFormatter
     def renderer_for(format)
       {
         'htmlify'  => BlogFormatter::CustomRenderer,
+        'markdown' => BlogFormatter::MarkdownRenderer,
         'redcloth' => BlogFormatter::RedClothRenderer
       }[format] or raise NotImplementedError.new("There is no #{format} renderer")
     end

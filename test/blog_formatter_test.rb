@@ -83,6 +83,12 @@ class BlogFormatterTest < Minitest::Test
     assert_equal expected, result
   end
 
+  test "markdown with sample" do
+    sample, expected = samples('markdown_sample')
+    result = @foo.blog_format(sample, 'markdown')
+    assert_equal expected, result
+  end
+
   test "html with sample" do
     sample, expected = ["<p>This is already formatted.</p>"] * 2
     result = @foo.blog_format(sample, 'html')
