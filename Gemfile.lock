@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    blog_formatter (0.0.1)
+    blog_formatter (0.0.2)
       RedCloth (~> 4.2.0)
       kramdown
 
