@@ -9,7 +9,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     RedCloth (4.2.9)
-    kramdown (1.2.0)
+    kramdown (1.10.0)
     minitest (5.0.7)
     rake (10.1.0)
 
@@ -20,3 +20,6 @@ DEPENDENCIES
   blog_formatter!
   minitest
   rake
+
+BUNDLED WITH
+   1.11.2
